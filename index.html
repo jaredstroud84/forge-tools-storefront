@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge. — Any problem into an A.I. solution</title>
+<meta name="description" content="Describe the problem. Forge builds the tool. $4.99 people · $7.99 business. No subscription. That tool stays yours after you pay.">
+<meta name="theme-color" content="#070707">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+:root{--bg:#070707;--panel:#121212;--line:#2a2a2a;--o:#e85d04;--t:#f4f1ea;--m:#9a958c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:IBM Plex Sans,Segoe UI,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;background:rgba(7,7,7,.92);border-bottom:1px solid var(--line);z-index:40}
+.nav{display:flex;justify-content:space-between;align-items:center;height:56px}
+.brand{font-weight:700;font-size:22px;letter-spacing:.04em}
+.brand b{color:var(--o)}
+.hero{text-align:center;padding:48px 0 12px}
+.hero h1{font-size:clamp(32px,7vw,56px);line-height:1.05;font-weight:600}
+.hero h1 span{color:var(--o)}
+.price{display:block;margin-top:10px;font-size:20px;color:var(--o);font-weight:600}
+.hero p{color:var(--m);margin-top:12px}
+.search{max-width:640px;margin:22px auto 0;position:relative;text-align:left}
+.search input{width:100%;padding:16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--t);font-size:16px}
+h3.lane{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--m);margin:18px 0 8px}
+.rails{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+@media(max-width:760px){.rails{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer;width:100%;text-align:left;color:inherit}
+.card:hover{border-color:var(--o)}
+.card em{color:var(--o);font-style:normal;font-size:12px;float:right}
+.card p{color:var(--m);font-size:13px;margin-top:6px}
+#ownedBar{display:none;border:1px solid var(--o);color:var(--o);text-align:center;padding:10px;border-radius:12px;margin:12px auto;max-width:640px;font-weight:700;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:16px 0 40px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:90;align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:20px}
+label{display:block;color:var(--m);font-size:12px;margin:10px 0 4px}
+textarea,input.f{width:100%;background:#0a0a0a;color:var(--t);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit}
+textarea{min-height:88px}
+.out{background:#111;border:1px solid var(--line);border-radius:10px;padding:12px;white-space:pre-wrap;font-size:13px;min-height:70px;margin:12px 0}
+.btn{background:var(--o);color:#140800;border:0;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer;margin:4px 4px 0 0}
+.btn.g{background:transparent;color:var(--t);border:1px solid var(--line)}
+#followBox{display:none;margin:10px 0}
+footer{text-align:center;color:var(--m);font-size:12px;padding:24px 0;border-top:1px solid var(--line)}
+#payNote{display:none;max-width:640px;margin:12px auto;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:700}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><div class="brand">FORGE<b>.</b></div><div style="color:var(--o);font-size:12px;font-weight:700">$4.99 people · $7.99 business</div></div></header>
+<section class="hero wrap">
+<h1>Any problem<br>into an A.I. <span>solution</span>.</h1>
+<span class="price">Only $4.99 per build</span>
+<p>Describe what is wrong. Pay once. Stripe has to confirm. Then that tool stays yours. No subscription.</p>
+<div class="search"><input id="q" placeholder="Describe the problem" autocomplete="off"></div>
+<div id="payNote"></div>
+<div id="ownedBar">Your tools stay unlocked on this phone. Run them anytime.</div>
+</section>
+<div class="wrap rails">
+<div><h3 class="lane">Personal $4.99</h3><div id="pc"></div></div>
+<div><h3 class="lane">Business $7.99</h3><div id="bc"></div></div>
+</div>
+<div class="wrap">
+<h3 class="lane">The Forge</h3>
+<p style="color:var(--m);font-size:13px;margin-bottom:10px" id="count"></p>
+<div class="grid" id="grid"></div>
+</div>
+<div class="modal" id="modal"><div class="box" onclick="event.stopPropagation()">
+<div id="mName" style="font-weight:800;font-size:22px"></div>
+<div id="mPrice" style="color:var(--o);font-weight:700;margin:4px 0 10px"></div>
+<div id="mDesc" style="color:var(--m);font-size:14px"></div>
+<div id="fields"></div>
+<div class="out" id="mOut">Pay first. Run is locked until Stripe confirms.</div>
+<div id="followBox"><textarea id="followQ" placeholder="Ask a follow-up. This tool is already yours."></textarea><button class="btn" id="followBtn">Ask follow-up</button></div>
+<button class="btn" id="runBtn">Pay to unlock this tool</button>
+<button class="btn g" id="copyBtn" style="display:none">Copy</button>
+<button class="btn" id="keepBtn">Pay — then it is yours</button>
+<button class="btn g" id="closeBtn">Close</button>
+<p style="color:#666;font-size:11px;margin-top:10px">Closing Stripe without paying does not unlock the tool. Run only works after Stripe confirms.</p>
+</div></div>
+<footer>Forge. $4.99 people · $7.99 business. No subscription. Pay first.</footer>
+<script src="/app.js"></script>
+</body>
+</html>
