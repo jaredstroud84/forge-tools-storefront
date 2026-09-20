@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Forge. — Solutions</title>
-<meta name="description" content="Type the problem. Get the solution. $4.99 once. No subscription. That tool stays yours.">
+<title>Forge. — The page you send today</title>
+<meta name="description" content="Type the problem. See the first page free. Pay $4.99 once. Keep the finished solution you can send today. No subscription.">
 <meta name="theme-color" content="#070707">
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -14,18 +14,22 @@
 body{background:var(--bg);color:var(--t);font-family:IBM Plex Sans,Segoe UI,system-ui,sans-serif}
 .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
 header{position:sticky;top:0;background:rgba(7,7,7,.92);border-bottom:1px solid var(--line);z-index:40}
-.nav{display:flex;justify-content:space-between;align-items:center;height:56px}
+.nav{display:flex;justify-content:space-between;align-items:center;height:56px;gap:12px}
 .brand{font-weight:700;font-size:22px;letter-spacing:.04em}
 .brand b{color:var(--o)}
-.hero{text-align:center;padding:48px 0 12px}
-.hero h1{font-size:clamp(32px,7vw,56px);line-height:1.05;font-weight:600}
+.nav a{color:var(--o);font-size:12px;font-weight:700;text-decoration:none}
+.hero{text-align:center;padding:44px 0 8px}
+.hero h1{font-size:clamp(30px,6.4vw,54px);line-height:1.06;font-weight:600}
 .hero h1 span{color:var(--o)}
 .price{display:block;margin-top:10px;font-size:20px;color:var(--o);font-weight:600}
-.hero p{color:var(--m);margin-top:12px}
+.hero p{color:var(--m);margin-top:12px;max-width:640px;margin-left:auto;margin-right:auto}
 .search{max-width:640px;margin:22px auto 0;position:relative;text-align:left}
 .search input{width:100%;padding:16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--t);font-size:16px}
-h3.lane{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--m);margin:18px 0 8px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer;width:100%;text-align:left;color:inherit}
+#hints{display:none;position:absolute;left:0;right:0;top:100%;background:var(--panel);border:1px solid var(--line);border-radius:0 0 12px 12px;z-index:20}
+#hints button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--t);padding:10px 14px;cursor:pointer;font:inherit}
+#hints button:hover{background:#1a1a1a;color:var(--o)}
+h3.lane{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--m);margin:22px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;width:100%;text-align:left;color:inherit}
 .card:hover{border-color:var(--o)}
 .card em{color:var(--o);font-style:normal;font-size:12px;float:right}
 .card p{color:var(--m);font-size:13px;margin-top:6px}
@@ -33,47 +37,66 @@ h3.lane{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(-
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:16px 0 40px}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:90;align-items:center;justify-content:center;padding:16px}
 .modal.show{display:flex}
-.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:20px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:20px}
 label{display:block;color:var(--m);font-size:12px;margin:10px 0 4px}
-textarea,input.f{width:100%;background:#0a0a0a;color:var(--t);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit}
-textarea{min-height:88px}
-.out{background:#111;border:1px solid var(--line);border-radius:10px;padding:12px;white-space:pre-wrap;font-size:13px;min-height:70px;margin:12px 0}
+textarea{width:100%;background:#0a0a0a;color:var(--t);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;min-height:96px}
+.out{background:#111;border:1px solid var(--line);border-radius:10px;padding:12px;white-space:pre-wrap;font-size:13px;min-height:90px;margin:12px 0}
 .btn{background:var(--o);color:#140800;border:0;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer;margin:4px 4px 0 0}
 .btn.g{background:transparent;color:var(--t);border:1px solid var(--line)}
-#followBox{display:none;margin:10px 0}
+#followBox,#teachBox,#vaultBox{display:none;margin:10px 0}
+#teachBox{color:var(--m);font-size:13px;line-height:1.45}
 footer{text-align:center;color:var(--m);font-size:12px;padding:24px 0;border-top:1px solid var(--line)}
 #payNote{display:none;max-width:640px;margin:12px auto;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:700}
+.demo{border:1px dashed var(--line);border-radius:14px;padding:16px;margin:8px 0 28px;color:var(--m);font-size:14px}
+.demo b{color:var(--t)}
 </style>
 </head>
 <body>
-<header><div class="wrap nav"><div class="brand">FORGE<b>.</b></div><div style="color:var(--o);font-size:12px;font-weight:700">$4.99 once</div></div></header>
+<header>
+  <div class="wrap nav">
+    <div class="brand">FORGE<b>.</b></div>
+    <a href="#mine" id="mineLink">My solutions</a>
+  </div>
+</header>
 <section class="hero wrap">
-<h1>Any problem<br>into a <span>solution</span>.</h1>
-<span class="price">$4.99 once. Every solution.</span>
-<p>Type what is wrong. Pay once. That solution stays yours. No subscription. No personal vs business.</p>
-<div class="search"><input id="q" placeholder="Describe the problem" autocomplete="off"></div>
-<div id="payNote"></div>
-<div id="ownedBar">Your solutions stay unlocked on this phone. Run them anytime.</div>
+  <h1>Leave with a page<br>you can <span>send today</span>.</h1>
+  <span class="price">See the first cut free. $4.99 keeps the whole solution.</span>
+  <p>Not another chat. Type the mess. Forge writes the letter, the bid sheet, the follow-up — the thing you hand someone. Pay once. It stays yours.</p>
+  <div class="search">
+    <input id="q" placeholder="Start typing the problem — we finish the sentence" autocomplete="off">
+    <div id="hints"></div>
+  </div>
+  <div id="payNote"></div>
+  <div id="ownedBar">Your solutions stay on this phone. Run them anytime.</div>
 </section>
 <div class="wrap">
-<h3 class="lane">Solutions</h3>
-<p style="color:var(--m);font-size:13px;margin-bottom:10px" id="count"></p>
-<div class="grid" id="grid"></div>
+  <h3 class="lane">Watch one</h3>
+  <div class="demo" id="liveDemo"></div>
+  <h3 class="lane" id="mine">Solutions — $4.99 once</h3>
+  <p style="color:var(--m);font-size:13px;margin-bottom:10px" id="count"></p>
+  <div class="grid" id="grid"></div>
 </div>
 <div class="modal" id="modal"><div class="box" onclick="event.stopPropagation()">
-<div id="mName" style="font-weight:800;font-size:22px"></div>
-<div id="mPrice" style="color:var(--o);font-weight:700;margin:4px 0 10px"></div>
-<div id="mDesc" style="color:var(--m);font-size:14px"></div>
-<div id="fields"></div>
-<div class="out" id="mOut">Pay first. Run is locked until Stripe confirms.</div>
-<div id="followBox"><textarea id="followQ" placeholder="Ask a follow-up. This solution is already yours."></textarea><button class="btn" id="followBtn">Ask follow-up</button></div>
-<button class="btn" id="runBtn">Pay to unlock this solution</button>
-<button class="btn g" id="copyBtn" style="display:none">Copy</button>
-<button class="btn" id="keepBtn">Pay — then it is yours</button>
-<button class="btn g" id="closeBtn">Close</button>
-<p style="color:#666;font-size:11px;margin-top:10px">Closing Stripe without paying does not unlock it. Run only works after Stripe confirms.</p>
+  <div id="mName" style="font-weight:800;font-size:22px"></div>
+  <div id="mPrice" style="color:var(--o);font-weight:700;margin:4px 0 10px"></div>
+  <div id="mDesc" style="color:var(--m);font-size:14px"></div>
+  <div id="fields"></div>
+  <div class="out" id="mOut">Type the facts. Hit preview. You see the first page before you pay.</div>
+  <div id="followBox"><textarea id="followQ" placeholder="Ask a follow-up. Already yours."></textarea><button class="btn" id="followBtn">Ask follow-up</button></div>
+  <div id="teachBox"></div>
+  <div id="vaultBox"><label>Email so this stays if you switch phones (saved on this device only)<input id="vaultEmail" class="f" style="width:100%;margin-top:6px;padding:10px;border-radius:8px;border:1px solid var(--line);background:#0a0a0a;color:var(--t)" placeholder="you@email.com"></label></div>
+  <button class="btn" id="previewBtn">Preview from my facts</button>
+  <button class="btn g" id="sampleBtn">Load sample</button>
+  <button class="btn" id="runBtn">Unlock full page — $4.99</button>
+  <button class="btn g" id="copyBtn" style="display:none">Copy</button>
+  <button class="btn g" id="dlBtn" style="display:none">Download</button>
+  <button class="btn g" id="printBtn" style="display:none">Print / PDF</button>
+  <button class="btn" id="keepBtn">Pay $4.99 — keep this solution</button>
+  <button class="btn g" id="closeBtn">Close</button>
+  <p style="color:#666;font-size:11px;margin-top:10px">Preview is free. The full sendable page unlocks after Stripe confirms. Closing checkout charges nothing.</p>
 </div></div>
-<footer>Forge. $4.99 once per solution. No subscription.</footer>
+<footer>Forge. One price. $4.99. You keep the page, not a chat thread.</footer>
+<script src="/engine.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>
