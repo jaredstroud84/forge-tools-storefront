@@ -91,7 +91,12 @@
     if (!b) return;
     if (paid()) { b.textContent = "Yours"; b.disabled = true; return; }
     b.textContent = "Pay $4.99";
-    b.onclick = function () { try { sessionStorage.setItem("s4.pending", "games"); } catch (e) {} location.assign(PAY); };
+    b.onclick = function () {
+      try { sessionStorage.setItem("s4.pending", "games"); } catch (e) {}
+      fetch("/api/checkout?toolId=games").then(function (r) { return r.json(); }).then(function (j) {
+        location.assign((j && j.url) || PAY);
+      }).catch(function () { location.assign(PAY); });
+    };
   }
   function confirmReturn() {
     var p = new URLSearchParams(location.search);
